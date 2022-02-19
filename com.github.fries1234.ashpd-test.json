@@ -1,0 +1,39 @@
+{
+    "app-id": "com.github.fries1234.ashpd-test",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "master",
+    "sdk": "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "command": "ashpd-test",
+    "tags" : [
+        "nightly"
+    ],
+    "finish-args":[
+        "--filesystem=host",
+        "--share=network",
+        "--share=ipc",
+        "--talk-name=org.freedesktop.FileManager1",
+        "--talk-name=org.a11y.Bus"
+    ],
+    "build-options": {
+        "append-path" : "/usr/lib/sdk/rust-stable/bin",
+        "build-args" : [
+            "--share=network"
+        ]
+    },
+    "modules":[
+        {
+            "name":"ashpd-test",
+            "builddir":true,
+            "buildsystem":"meson",
+            "sources": [
+                {
+                    "type" : "dir",
+                    "path" : "./"
+                }
+            ]
+        }
+    ]
+}

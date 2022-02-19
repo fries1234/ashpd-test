@@ -1,0 +1,5 @@
+/target
+testfile.txt
+build
+_build
+.flatpak-builder
