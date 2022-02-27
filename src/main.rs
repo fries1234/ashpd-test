@@ -7,6 +7,7 @@ fn main() {
 }
 
 async fn run() {
+    tracing_subscriber::fmt::init();
     let test = "This is a test file";
     match fs::write("testfile.txt", test).await {
         Ok(_) => {
@@ -15,17 +16,17 @@ async fn run() {
                     match trash::trash_file(&file).await {
                         Ok(_) => {},
                         Err(err) => {
-                            println!("An error occured while trying to trash the test file: {}", err);
+                            tracing::error!("An error occured while trying to trash the test file: {}", err);
                         },
                     }
                 },
                 Err(err) => {
-                    println!("An error occured while trying to open the test file: {}", err);
+                    tracing::error!("An error occured while trying to open the test file: {}", err);
                 },
             }
         },
         Err(err) => {
-            println!("An error occured while trying to write the test file data: {}", err);
+            tracing::error!("An error occured while trying to write the test file data: {}", err);
         },
     }
 }
